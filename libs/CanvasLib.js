@@ -32,6 +32,18 @@ const CanvasLib = {
       "#B100FE",
       "#FF006E",
     ];
+
+    const a = [];
+    for (let i = 0; i < 16; i++) {
+      a.push([]);
+      for (let j = 0; j < 16; j++) {
+        //get a random color
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        a[i].push(randomColor);
+      }
+    }
+
+    return a;
   },
 };
 
