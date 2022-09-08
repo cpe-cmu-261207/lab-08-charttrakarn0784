@@ -14,7 +14,7 @@ export default function Cell(props) {
 
         //please replace color with painted color from position xPos, yPos
         //pixels , xPos , yPos
-        backgroundColor: pixels[xPos][yPos],
+        backgroundColor: pixels[yPos][xPos],
 
         borderWidth: "1px",
         borderStyle: "solid",

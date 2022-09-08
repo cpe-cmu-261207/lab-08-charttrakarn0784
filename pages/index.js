@@ -13,13 +13,29 @@ export default function Home() {
   //16x16 2D Array that holds color data
   const [pixels, setPixels] = useState(CanvasLib.createEmptyCanvas());
 
+  const [intervalId, setIntervalId] = useState(null);
+
+  const [ids, setIds] = useState([]);
+
+  const playDisco = () => {
+    const id = setInterval(
+      () => setPixels(CanvasLib.createRandomCanvas()),
+      100
+    );
+    setIds([...ids, id]);
+  };
+
+  const stopDisco = () => {
+    for (const id of ids) clearInterval(id);
+  };
+
   //will be called by Cell component
   const paint = (xPos, yPos) => {
     //copy from old 2d Array
     const newPixels = CanvasLib.copyCanvas(pixels);
     //your code here
     //update newPixels[...][...] xPos, yPos, selColor
-    newPixels[xPos][yPos] = selColor;
+    newPixels[yPos][xPos] = selColor;
     //setPixels(...)
     setPixels(newPixels);
   };
@@ -28,10 +44,15 @@ export default function Home() {
     //your code here
     //Hint : use CanvasLib.createEmptyCanvas()
     setPixels(CanvasLib.createEmptyCanvas());
+    clearInterval();
   };
 
   const random = () => {
     setPixels(CanvasLib.createRandomCanvas());
+  };
+
+  const disco = () => {
+    setInterval(() => setPixels(CanvasLib.createRandomCanvas()), 100);
   };
 
   return (
@@ -47,6 +68,12 @@ export default function Home() {
           </button>
           <button className="btn btn-dark" onClick={random}>
             Random Color
+          </button>
+          <button className="btn btn-dark" onClick={() => playDisco()}>
+            Play Disco
+          </button>
+          <button className="btn btn-dark" onClick={() => stopDisco()}>
+            Stop Disco
           </button>
         </div>
       </PainterContext.Provider>
